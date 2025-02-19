@@ -14,20 +14,23 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  name      String?
-  email     String    @unique
-  password  String?
-  phone     String?
-  avatar    String?
-  addresses Address[]
-  orders    Order[]
-  reviews   Review[]
-  role      Role      @default(USER)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  Cart      Cart[]
+  id         Int       @id @default(autoincrement())
+  name       String?
+  email      String    @unique
+  password   String?
+  phone      String?
+  avatar     String?
+  provider   String?  // "google" ya null (agar normal email signup hua ho)
+  providerId String?  // Google UID
+  addresses  Address[]
+  orders     Order[]
+  reviews    Review[]
+  role       Role      @default(USER)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  Cart       Cart[]
 }
+
 
 model Address {
   id        Int      @id @default(autoincrement())

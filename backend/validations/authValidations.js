@@ -6,6 +6,7 @@ vine.errorReporter = () => new CustomErrorReporter();
 
 export const registerSchema = vine.object({
     email: vine.string().trim().email(),
+    name: vine.string().trim(),
     password: vine.string().minLength(6).maxLength(20).confirmed(),
     role: vine.enum(['USER', 'ADMIN']).optional(),
   })

@@ -10,6 +10,7 @@ const router = Router();
 router.get("/profile", authMiddleware, UserController.getProfile);
 router.put("/profile", authMiddleware, upload.single("avatar"), UserController.updateProfile);
 router.post("/address", authMiddleware, UserController.createAddress);
+router.get("/address", authMiddleware, UserController.getAddress);
 router.put("/address/:id", authMiddleware, UserController.updateAddress);
 router.delete("/address/:id", authMiddleware, UserController.deleteAddress);
 router.post("/reviews/:id", authMiddleware, UserController.addReview);

@@ -20,9 +20,7 @@ class AuthController {
 
       const newUser = await prisma.user.create({
         data: {
-            name:payload.name,
-            email:payload.email,
-            password:payload.password
+           ...payload
         },
       });
       res.status(201).json({ message: "User registered successfully" });
@@ -54,7 +52,7 @@ class AuthController {
         return res.status(400).json({ message: "Invalid email or password" });
 
       const token = generateToken(user);
-      res.json({ message: "Login successful", token });
+      res.json({ message: "Login successful", token ,status:200});
     } catch (error) {
       console.log("The error is", error);
       if (error instanceof errors.E_VALIDATION_ERROR) {

@@ -32,8 +32,7 @@ class UserController {
 
   static async updateProfile(req, res) {
     try {
-      const validator = vine.compile(profileSchema);
-      const payload = await validator.validate(req.body);
+      const payload = req.body
 
       let profilePicUrl = null;
       if (req.file) {
@@ -79,6 +78,31 @@ class UserController {
         data: { ...payload, userId: req.user.id },
       });
       res.status(201).json(address);
+    } catch (error) {
+      if (error instanceof errors.E_VALIDATION_ERROR) {
+        return res.status(400).json({ errors: error.messages });
+      } else {
+        return res.status(500).json({
+          status: 500,
+          message: "Something went wrong.Please try again.",
+        });
+      }
+    }
+  }
+  // get Address
+  static async getAddress(req, res) {
+    try {
+
+      const address = await prisma.address.findMany({
+        where:{
+          userId:req.user.id 
+        }
+      })
+      if (address.length===0) {
+        
+        return res.status(400).json({message:"No address added !"});
+      }
+      res.status(201).json({data:address});
     } catch (error) {
       if (error instanceof errors.E_VALIDATION_ERROR) {
         return res.status(400).json({ errors: error.messages });
