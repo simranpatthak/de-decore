@@ -39,7 +39,7 @@ class ProductController {
           description: payload.description,
           price: payload.price,
           discount: payload.discount,
-          stock: payload.stocks,
+          stock: payload.stock,
           images: { create: images },
         },
       });
